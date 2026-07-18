@@ -75,34 +75,52 @@ The app will be available at `http://localhost:5173`
 client/
 ├── public/                  # Static assets
 ├── src/
-│   ├── assets/             # Images, icons
+│   ├── assets/             # Images, logo, demo screenshots
 │   ├── components/
 │   │   ├── ui/             # Reusable UI components
 │   │   │   ├── Badge.jsx   # Status badges
 │   │   │   ├── Button.jsx  # Retro arcade buttons
 │   │   │   ├── Card.jsx    # Chunky bordered cards
+│   │   │   ├── Checkbox.jsx # Retro checkboxes
+│   │   │   ├── Divider.jsx # Section dividers
 │   │   │   ├── Input.jsx   # Terminal-style inputs
 │   │   │   ├── Select.jsx  # Retro dropdowns
 │   │   │   ├── Skeleton.jsx # Loading states
 │   │   │   └── index.js    # Component exports
 │   │   ├── ActivityLog.jsx
 │   │   ├── Layout.jsx      # Synthwave sidebar layout
+│   │   ├── ProtectedRoute.jsx # Auth route guard
+│   │   ├── RepoSelection.jsx
 │   │   ├── ScanProgress.jsx
 │   │   ├── ScanResults.jsx
+│   │   ├── SocialButton.jsx
 │   │   └── Toast.jsx       # Notification system
 │   ├── pages/
+│   │   ├── ActivityLog.jsx  # Full activity feed
+│   │   ├── AuthCallback.jsx # GitHub OAuth callback
+│   │   ├── AuthError.jsx    # OAuth error page
 │   │   ├── BrandPreview.jsx # Design system showcase
 │   │   ├── Dashboard.jsx    # Main dashboard
+│   │   ├── Documentation.jsx # Product documentation
+│   │   ├── ForgotPassword.jsx
+│   │   ├── Landing.jsx      # Public landing page
+│   │   ├── LearnMore.jsx    # Product explainer
+│   │   ├── Login.jsx
+│   │   ├── Register.jsx
 │   │   ├── ScanDetail.jsx   # Scan details view
 │   │   └── Settings.jsx     # App settings
-│   ├── api.js              # Axios API configuration
+│   ├── config/
+│   │   └── env.js          # Centralized env configuration
+│   ├── context/
+│   │   └── AuthContext.jsx # Auth state provider
+│   ├── services/
+│   │   └── api.js          # Axios API configuration
 │   ├── App.jsx             # Root component with routing
 │   ├── index.css           # Design tokens & global styles
 │   └── main.jsx            # Application entry point
-├── BRAND_STYLE_GUIDE.md    # Complete design documentation
-├── TASK_LANDING_AUTH_PAGES.md # Frontend task specs
 ├── index.html
 ├── package.json
+├── setup-env.sh            # Environment setup helper
 ├── vite.config.js
 └── eslint.config.js
 ```
@@ -247,12 +265,18 @@ The design system uses CSS custom properties defined in `src/index.css`:
 
 ## 📖 Pages
 
-| Route | Page | Description |
-|-------|------|-------------|
-| `/` | Dashboard | Main dashboard with scan controls and activity log |
-| `/settings` | Settings | API configuration and sync preferences |
-| `/scan/:id` | Scan Detail | Detailed view of a specific scan |
-| `/brand` | Brand Preview | Design system showcase and component gallery |
+| Route | Page | Access | Description |
+|-------|------|--------|-------------|
+| `/` | Landing | Public | Marketing landing page with waitlist signup |
+| `/learn-more` | Learn More | Public | Product explainer |
+| `/docs` | Documentation | Public | Product documentation |
+| `/login` | Login | Public | Email + GitHub OAuth sign-in |
+| `/auth/callback` | Auth Callback | Public | GitHub OAuth callback handler |
+| `/auth/error` | Auth Error | Public | OAuth error page |
+| `/dashboard` | Dashboard | Protected | Main dashboard with scan controls and activity log |
+| `/settings` | Settings | Protected | Portfolio repo, sync preferences |
+| `/scan/:id` | Scan Detail | Protected | Detailed view of a specific scan |
+| `/activity` | Activity Log | Protected | Full activity feed |
 
 ---
 
@@ -260,25 +284,23 @@ The design system uses CSS custom properties defined in `src/index.css`:
 
 ### Environment Variables
 
-Create a `.env` file in the root:
+Run the setup helper (or create `.env.local` manually):
+
+```bash
+npm run setup
+```
 
 ```env
-VITE_API_URL=http://localhost:5500/api
+VITE_API_URL=            # Backend API base URL (defaults to /api via the dev proxy)
+VITE_GITHUB_CLIENT_ID=   # GitHub OAuth App Client ID
+VITE_AUTH_CALLBACK_URL=  # OAuth callback (default http://localhost:5173/auth/callback)
 ```
+
+All environment access is centralized in `src/config/env.js`.
 
 ### API Configuration
 
-The API client is configured in `src/api.js`:
-
-```javascript
-import axios from 'axios';
-
-const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5500/api',
-});
-
-export default api;
-```
+The API client lives in `src/services/api.js` — an Axios instance that attaches the auth token to every request and handles 401 redirects globally. In development, requests to `/api` are proxied to the backend via `vite.config.js`.
 
 ---
 
@@ -296,18 +318,23 @@ export default api;
 
 ## 📚 Documentation
 
-- **[BRAND_STYLE_GUIDE.md](./BRAND_STYLE_GUIDE.md)** — Complete design system documentation
-- **[TASK_LANDING_AUTH_PAGES.md](./TASK_LANDING_AUTH_PAGES.md)** — Landing & auth pages specification
+- The design system (colors, tokens, utility classes) is documented in this README and showcased in `src/pages/BrandPreview.jsx`
+- Product documentation lives in-app at `/docs` (`src/pages/Documentation.jsx`)
 
 ---
 
 ## 🎯 Roadmap
 
+### Shipped
+
+- [x] Landing page with waitlist signup
+- [x] Authentication flow (Login + GitHub OAuth)
+- [x] Repository scanning, repo selection & automated PR creation
+- [x] Activity log & PR statistics
+
 ### Upcoming Features
 
-- [ ] Landing page
-- [ ] Authentication flow (Login, Register, Forgot Password)
-- [ ] GitHub OAuth integration
+- [ ] Register & Forgot Password flows (pages built, not yet routed)
 - [ ] Real-time sync notifications
 - [ ] Dark/light theme toggle (synthwave vs cyberpunk)
 
@@ -315,7 +342,7 @@ export default api;
 
 ## 🤝 Contributing
 
-1. Follow the design system in `BRAND_STYLE_GUIDE.md`
+1. Follow the design system documented in this README
 2. Use existing UI components from `components/ui/`
 3. Keep the retro aesthetic — chunky borders, neon glows, uppercase labels
 4. Run `npm run lint` before committing

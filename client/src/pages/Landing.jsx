@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Card, Badge } from '../components/ui';
+import api from '../services/api';
 
 // Section Header Component
 function SectionHeader({ title, subtitle, className = "" }) {
@@ -57,20 +58,25 @@ function ShieldIcon({ className }) {
 const WaitlistForm = ({ className = "" }) => {
     const [email, setEmail] = useState("");
     const [status, setStatus] = useState("idle");
+    const [errorMessage, setErrorMessage] = useState("");
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (!email) return;
 
         setStatus("loading");
+        setErrorMessage("");
 
-        // TODO: Connect this to your backend or Google Sheets
-        console.log("WAITLIST_LEAD:", email);
-
-        setTimeout(() => {
+        try {
+            await api.post("/waitlist", { email, source: "landing" });
             setStatus("success");
             setEmail("");
-        }, 1500);
+        } catch (err) {
+            setErrorMessage(
+                err.response?.data?.error || "Connection failed. Please try again."
+            );
+            setStatus("error");
+        }
     };
 
     if (status === "success") {
@@ -121,6 +127,11 @@ const WaitlistForm = ({ className = "" }) => {
                     {status === "loading" ? "PROCESSING..." : "JOIN WAITLIST"}
                 </Button>
             </div>
+            {status === "error" && (
+                <p className="mt-4 text-xs text-[#ff3366] font-mono uppercase tracking-wider pl-1">
+                    // ERROR: {errorMessage}
+                </p>
+            )}
             <p className="mt-4 text-[10px] text-[#666666] font-mono uppercase tracking-widest pl-1">
                 // Limited Spots Available for Beta v1.0
             </p>
@@ -129,10 +140,6 @@ const WaitlistForm = ({ className = "" }) => {
 };
 
 export default function Landing() {
-    const scrollToFeatures = () => {
-        document.getElementById('features').scrollIntoView({ behavior: 'smooth' });
-    };
-
     return (
         <div className="bg-[#0a0a0f] min-h-screen relative overflow-x-hidden">
             {/* Background Effects */}
