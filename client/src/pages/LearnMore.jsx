@@ -166,50 +166,54 @@ export default function LearnMore() {
                     <div className="grid md:grid-cols-2 gap-8">
                         <div className="card-sleek md:card-retro p-8 border-3 border-[#ff3366]/50">
                             <div className="w-14 h-14 border-2 border-[#ff3366] bg-[#0a0a0f] flex items-center justify-center mb-4 font-mono font-bold text-[#ff3366] text-lg">OLD</div>
-                            <h3 className="text-2xl font-bold text-[#ff3366] uppercase mb-4">Before PortfolioSync</h3>
+                            <h3 className="text-2xl font-bold text-[#ff3366] uppercase mb-4">The Old Way</h3>
                             <ul className="space-y-3 text-[#a0a0a0]">
                                 <li className="flex items-start gap-3">
                                     <span className="text-[#ff3366] text-xl">×</span>
-                                    <span>Work on a cool project for weeks</span>
+                                    <span>Build</span>
                                 </li>
                                 <li className="flex items-start gap-3">
                                     <span className="text-[#ff3366] text-xl">×</span>
-                                    <span>Push to GitHub and feel accomplished</span>
+                                    <span>Push</span>
                                 </li>
                                 <li className="flex items-start gap-3">
                                     <span className="text-[#ff3366] text-xl">×</span>
-                                    <span>Remember you need to update your portfolio...</span>
+                                    <span>Remember the portfolio exists</span>
                                 </li>
                                 <li className="flex items-start gap-3">
                                     <span className="text-[#ff3366] text-xl">×</span>
-                                    <span>Spend 30 minutes manually editing HTML/JSON</span>
+                                    <span>30 minutes of manual edits</span>
                                 </li>
                                 <li className="flex items-start gap-3">
                                     <span className="text-[#ff3366] text-xl">×</span>
-                                    <span>Deploy the changes</span>
+                                    <span>Deploy</span>
                                 </li>
                                 <li className="flex items-start gap-3">
                                     <span className="text-[#ff3366] text-xl">×</span>
-                                    <span>Repeat this process for every project</span>
+                                    <span>Repeat forever</span>
                                 </li>
                             </ul>
                         </div>
 
                         <div className="card-sleek md:card-retro p-8 border-3 border-[#39ff14]/50">
                             <div className="w-14 h-14 border-2 border-[#39ff14] bg-[#0a0a0f] flex items-center justify-center mb-4 font-mono font-bold text-[#39ff14] text-lg">NEW</div>
-                            <h3 className="text-2xl font-bold text-[#39ff14] uppercase mb-4">With PortfolioSync</h3>
+                            <h3 className="text-2xl font-bold text-[#39ff14] uppercase mb-4">The PortfolioSync Way</h3>
                             <ul className="space-y-3 text-[#a0a0a0]">
                                 <li className="flex items-start gap-3">
                                     <CheckIcon className="w-6 h-6 text-[#39ff14] flex-shrink-0" />
-                                    <span>Work on your amazing project</span>
+                                    <span>Build</span>
                                 </li>
                                 <li className="flex items-start gap-3">
                                     <CheckIcon className="w-6 h-6 text-[#39ff14] flex-shrink-0" />
-                                    <span>Push to GitHub</span>
+                                    <span>Push</span>
                                 </li>
                                 <li className="flex items-start gap-3">
                                     <CheckIcon className="w-6 h-6 text-[#39ff14] flex-shrink-0" />
-                                    <span className="text-[#39ff14] font-bold">That's it!</span>
+                                    <span>Merge a PR</span>
+                                </li>
+                                <li className="flex items-start gap-3">
+                                    <CheckIcon className="w-6 h-6 text-[#39ff14] flex-shrink-0" />
+                                    <span className="text-[#39ff14] font-bold font-mono uppercase">That's it.</span>
                                 </li>
                                 <li className="flex items-start gap-3 ml-8 mt-6">
                                     <span className="text-[#4cc9f0]">→</span>
@@ -352,7 +356,7 @@ export default function LearnMore() {
                                 </pre>
                             </div>
                             <p className="text-sm text-[#4cc9f0] mt-4 italic">
-                                You can also use webhooks for real-time notifications or query specific projects individually.
+                                You can also query specific projects individually.
                             </p>
                         </StepCard>
                     </div>
@@ -383,9 +387,9 @@ export default function LearnMore() {
                             color="#39ff14"
                         />
                         <FeatureBox
-                            abbr="RT"
-                            title="Real-Time Updates"
-                            description="Changes reflect within minutes of pushing to GitHub. No manual triggers needed."
+                            abbr="PR"
+                            title="Reviewable Updates"
+                            description="Every update arrives as a pull request on your repo. Nothing changes until you hit merge."
                             color="#f72585"
                         />
                         <FeatureBox
@@ -484,7 +488,7 @@ export default function LearnMore() {
                         />
                         <FAQItem
                             question="How fast are the updates?"
-                            answer="Usually within 2-5 minutes of pushing to GitHub! We use webhooks to detect changes instantly and process them in real-time."
+                            answer="PortfolioSync checks your GitHub on a schedule you choose — daily or weekly — and you can trigger a scan anytime from your dashboard. When new work is detected, it arrives as a pull request for you to review and merge."
                         />
                         <FAQItem
                             question="Do I need to code my own portfolio?"

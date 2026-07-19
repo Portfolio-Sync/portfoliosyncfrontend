@@ -196,7 +196,7 @@ export default function Landing() {
                         </h1>
 
                         <p className="text-lg md:text-xl text-[#a0a0a0] mb-8 max-w-lg font-light leading-relaxed border-l-2 border-[#2a2a4a] pl-6">
-                            Automatically detect changes in your GitHub repositories and update your portfolio site in real-time. No more manual updates.
+                            PortfolioSync watches your GitHub and updates your portfolio automatically. Every change arrives as a pull request — you review, you merge, you're done. No more manual updates.
                         </p>
 
                         <div className="flex flex-col gap-6">
@@ -267,25 +267,25 @@ export default function Landing() {
                         <FeatureCard
                             icon={<SyncIcon className="w-8 h-8" />}
                             title="Auto-Sync"
-                            description="Automatically detects pushes to your GitHub repositories."
+                            description="Push your code. PortfolioSync detects new work in your GitHub repos and preps your portfolio update for you."
                             color="#f72585"
                         />
                         <FeatureCard
                             icon={<CodeIcon className="w-8 h-8" />}
                             title="Smart Updates"
-                            description="Only syncs what changed. Optimized for performance and speed."
+                            description="Only syncs what changed. Your portfolio data stays clean — no duplicates, no noise, no stale entries."
                             color="#4cc9f0"
                         />
                         <FeatureCard
                             icon={<ShieldIcon className="w-8 h-8" />}
-                            title="Portfolio Ready"
-                            description="Formats data perfectly for your frontend portfolio display."
+                            title="You're In Control"
+                            description="Updates arrive as pull requests against your own repo. Nothing touches your site until you hit merge."
                             color="#39ff14"
                         />
                         <FeatureCard
                             icon={<LightningIcon className="w-8 h-8" />}
-                            title="Real-time"
-                            description="Changes reflect instantly. No more manual data entry."
+                            title="Portfolio Ready"
+                            description="Formats project data perfectly for your frontend — or pull it straight from the PortfolioSync API."
                             color="#b537f2"
                         />
                     </div>
@@ -308,19 +308,52 @@ export default function Landing() {
                             <StepCard
                                 number="01"
                                 title="Connect GitHub"
-                                description="Securely link your GitHub account to give read-only access to your repos."
+                                description="Sign in with GitHub. Read-only access: we can see your public repos, commits, and READMEs. We can't modify code, delete anything, or touch private repos unless you opt in."
                             />
                             <StepCard
                                 number="02"
                                 title="Select Repos"
-                                description="Choose which repositories you want to showcase on your portfolio."
+                                description="Choose which projects deserve the spotlight. Showcase the finished work you're proud of — skip the practice repos and forks."
                             />
                             <StepCard
                                 number="03"
-                                title="Auto-Sync"
-                                description="Our engine watches for changes and updates your portfolio automatically."
+                                title="Merge & Done"
+                                description="PortfolioSync opens a pull request on your portfolio repo with the updated project data. Review it, merge it, and your portfolio is current."
                             />
                         </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Trust / Security Section */}
+            <section className="py-16 md:py-24 px-4 md:px-6 relative z-10 bg-[#0f0f23]/50">
+                <div className="max-w-4xl mx-auto">
+                    <SectionHeader
+                        title="TRUST"
+                        subtitle="Read-Only. Reviewable. Yours."
+                    />
+
+                    <div className="card-sleek md:card-retro p-8 md:p-10">
+                        <ul className="space-y-6">
+                            <li className="flex items-start gap-4">
+                                <span className="w-2 h-2 bg-[#39ff14] shadow-[0_0_10px_#39ff14] mt-2.5 flex-shrink-0" />
+                                <span className="text-lg text-[#a0a0a0] leading-relaxed">
+                                    Read-only GitHub scopes — we literally cannot push to your repos
+                                </span>
+                            </li>
+                            <li className="flex items-start gap-4">
+                                <span className="w-2 h-2 bg-[#39ff14] shadow-[0_0_10px_#39ff14] mt-2.5 flex-shrink-0" />
+                                <span className="text-lg text-[#a0a0a0] leading-relaxed">
+                                    Every update is a pull request you approve
+                                </span>
+                            </li>
+                            <li className="flex items-start gap-4">
+                                <span className="w-2 h-2 bg-[#39ff14] shadow-[0_0_10px_#39ff14] mt-2.5 flex-shrink-0" />
+                                <span className="text-lg text-[#a0a0a0] leading-relaxed">
+                                    Your repo, your data file, your site — we never host or hijack your portfolio
+                                </span>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </section>
@@ -336,7 +369,7 @@ export default function Landing() {
                             Secure Your Access
                         </h2>
                         <p className="text-xl text-[#a0a0a0] mb-10 max-w-xl mx-auto">
-                            Join the private beta and be among the first to experience automated portfolio synchronization.
+                            Join the private beta. Limited spots for v1.0 — we're inviting in small batches so every builder gets a smooth experience.
                         </p>
                         <div className="flex justify-center">
                             <WaitlistForm className="max-w-lg mx-auto" />

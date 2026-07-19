@@ -48,7 +48,7 @@ function SectionHeader({ tag, title }) {
     );
 }
 
-function CodeBlock({ title, language = 'bash', children }) {
+function CodeBlock({ title, children }) {
     const [copied, setCopied] = useState(false);
 
     const handleCopy = () => {
@@ -189,7 +189,7 @@ export default function Documentation() {
         { id: 'getting-started', label: 'Getting Started' },
         { id: 'authentication', label: 'Authentication' },
         { id: 'api-reference', label: 'API Reference' },
-        { id: 'webhooks', label: 'Webhooks' },
+        { id: 'webhooks', label: 'Webhooks (Soon)' },
         { id: 'rate-limits', label: 'Rate Limits' },
         { id: 'sdks', label: 'SDKs & Libraries' },
         { id: 'faq', label: 'FAQ' },
@@ -243,7 +243,7 @@ export default function Documentation() {
                     </h1>
 
                     <p className="text-lg md:text-xl text-[#a0a0a0] max-w-2xl mx-auto leading-relaxed">
-                        Everything you need to integrate PortfolioSync into your portfolio website. Simple REST API, real-time webhooks, and comprehensive guides.
+                        Everything you need to integrate PortfolioSync into your portfolio website. Simple REST API, reviewable pull-request updates, and comprehensive guides.
                     </p>
                 </div>
             </section>
@@ -516,16 +516,16 @@ Content-Type: application/json`}
 
                         {/* ─── Webhooks ─────────────────────────────────────── */}
                         <div id="webhooks" className="scroll-mt-24 mb-20">
-                            <SectionHeader tag="Real-Time" title="Webhooks" />
+                            <SectionHeader tag="Coming Soon" title="Webhooks" />
 
                             <div className="space-y-6 text-[#a0a0a0] leading-relaxed">
                                 <p className="text-lg">
-                                    Configure webhooks to receive <span className="text-[#b537f2] font-bold">real-time notifications</span> when your portfolio data changes. Perfect for triggering rebuilds of static sites or updating dynamic content.
+                                    Webhooks are <span className="text-[#b537f2] font-bold">on our roadmap</span>. Once they ship, you'll be able to receive notifications when your portfolio data changes — perfect for triggering rebuilds of static sites or updating dynamic content. The planned spec is below.
                                 </p>
 
                                 <div className="card-sleek md:card-retro p-6 md:p-8">
                                     <h3 className="text-lg font-bold text-[#e8e8e8] uppercase tracking-wide mb-4">
-                                        Available Events
+                                        Planned Events
                                     </h3>
                                     <div className="grid sm:grid-cols-2 gap-3">
                                         {[
@@ -699,7 +699,7 @@ function Projects() {
                                     },
                                     {
                                         q: 'Can I use the API with a static site (e.g., Next.js, Gatsby)?',
-                                        a: 'Yes! For static sites, fetch data at build time using getStaticProps (Next.js) or gatsby-node.js (Gatsby). You can also set up webhooks to trigger a rebuild whenever your data changes.',
+                                        a: "Yes! For static sites, fetch data at build time using getStaticProps (Next.js) or gatsby-node.js (Gatsby). Once webhooks ship, you'll also be able to trigger a rebuild whenever your data changes.",
                                     },
                                     {
                                         q: 'Is there a GraphQL API?',
