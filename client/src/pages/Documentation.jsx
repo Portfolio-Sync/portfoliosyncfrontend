@@ -187,8 +187,8 @@ export default function Documentation() {
 
     const sections = [
         { id: 'getting-started', label: 'Getting Started' },
-        { id: 'authentication', label: 'Authentication' },
-        { id: 'api-reference', label: 'API Reference' },
+        { id: 'authentication', label: 'Authentication (Soon)' },
+        { id: 'api-reference', label: 'API Reference (Soon)' },
         { id: 'webhooks', label: 'Webhooks (Soon)' },
         { id: 'rate-limits', label: 'Rate Limits' },
         { id: 'sdks', label: 'SDKs & Libraries' },
@@ -243,7 +243,7 @@ export default function Documentation() {
                     </h1>
 
                     <p className="text-lg md:text-xl text-[#a0a0a0] max-w-2xl mx-auto leading-relaxed">
-                        Everything you need to integrate PortfolioSync into your portfolio website. Simple REST API, reviewable pull-request updates, and comprehensive guides.
+                        Everything you need to integrate PortfolioSync into your portfolio website. Reviewable pull-request updates today, a public REST API on the way, and comprehensive guides.
                     </p>
                 </div>
             </section>
@@ -279,7 +279,7 @@ export default function Documentation() {
 
                             <div className="prose-synthwave space-y-6 text-[#a0a0a0] leading-relaxed">
                                 <p className="text-lg">
-                                    PortfolioSync provides a REST API that lets your portfolio website fetch your latest GitHub projects, commit activity, and repository metadata — <span className="text-[#39ff14] font-bold">all automatically kept in sync</span>.
+                                    PortfolioSync keeps your portfolio updated today through pull requests to your own repo. A public REST API — letting your portfolio website fetch your latest GitHub projects, commit activity, and repository metadata directly — is <span className="text-[#39ff14] font-bold">in development</span>.
                                 </p>
 
                                 <div className="card-sleek md:card-retro p-6 md:p-8 space-y-6">
@@ -298,16 +298,16 @@ export default function Documentation() {
                                     </p>
 
                                     <h3 className="text-xl font-bold text-[#e8e8e8] uppercase tracking-wide">
-                                        3. Fetch Your Data
+                                        3. Fetch Your Data (Coming Soon)
                                     </h3>
                                     <p>
-                                        Use our API to retrieve your synced project data and display it on your portfolio site.
+                                        Once the public API launches, you'll retrieve your synced project data and display it on your portfolio site. Planned usage:
                                     </p>
 
-                                    <CodeBlock title="Example: Fetch Projects">
+                                    <CodeBlock title="Planned Usage: Fetch Projects">
                                         {`// Fetch your synced projects
 const response = await fetch(
-  'https://api.portfoliosync.io/v1/projects',
+  'https://API_BASE_URL/v1/projects',
   {
     headers: {
       'Authorization': 'Bearer YOUR_API_KEY',
@@ -325,11 +325,11 @@ console.log(projects);`}
 
                         {/* ─── Authentication ──────────────────────────────── */}
                         <div id="authentication" className="scroll-mt-24 mb-20">
-                            <SectionHeader tag="Security" title="Authentication" />
+                            <SectionHeader tag="Coming Soon" title="Authentication" />
 
                             <div className="space-y-6 text-[#a0a0a0] leading-relaxed">
                                 <p className="text-lg">
-                                    All API requests require authentication via a <span className="text-[#4cc9f0] font-bold">Bearer token</span>. You can generate an API key from your Settings page after logging in.
+                                    When the public API launches, all requests will require authentication via a <span className="text-[#4cc9f0] font-bold">Bearer token</span>, and you'll generate an API key from your Settings page after logging in.
                                 </p>
 
                                 <div className="card-sleek md:card-retro p-6 md:p-8">
@@ -379,11 +379,11 @@ Content-Type: application/json`}
 
                         {/* ─── API Reference ───────────────────────────────── */}
                         <div id="api-reference" className="scroll-mt-24 mb-20">
-                            <SectionHeader tag="Endpoints" title="API Reference" />
+                            <SectionHeader tag="Coming Soon" title="API Reference" />
 
                             <div className="space-y-6 text-[#a0a0a0] leading-relaxed">
                                 <p className="text-lg">
-                                    Base URL: <code className="text-[#4cc9f0] bg-[#0a0a0f] px-3 py-1 border border-[#2a2a4a] text-sm">https://api.portfoliosync.io/v1</code>
+                                    The endpoint spec below is what we're building. The base URL will be announced when the public API launches.
                                 </p>
 
                                 <h3 className="text-xl font-bold text-[#e8e8e8] uppercase tracking-wide mt-8 mb-4">
@@ -691,11 +691,11 @@ function Projects() {
                                 {[
                                     {
                                         q: 'How do I get my API key?',
-                                        a: 'After signing in with GitHub, navigate to your Settings page. You\'ll find an API Keys section where you can generate and manage your tokens.',
+                                        a: 'API keys ship with the public API launch. Once live, you\'ll find an API Keys section on your Settings page where you can generate and manage your tokens.',
                                     },
                                     {
                                         q: 'What happens if my token expires?',
-                                        a: 'JWT tokens expire after 24 hours. Use the refresh token endpoint to obtain a new access token without re-authenticating through GitHub.',
+                                        a: 'For the planned public API, tokens will expire after 24 hours, with a refresh endpoint to obtain a new access token without re-authenticating through GitHub.',
                                     },
                                     {
                                         q: 'Can I use the API with a static site (e.g., Next.js, Gatsby)?',
@@ -703,7 +703,7 @@ function Projects() {
                                     },
                                     {
                                         q: 'Is there a GraphQL API?',
-                                        a: 'Not yet, but it\'s on our roadmap! For now, the REST API provides all the data you need. Join the waitlist to be notified when GraphQL launches.',
+                                        a: 'Not yet — shipping the REST API comes first, and GraphQL is on the roadmap after that. Join the waitlist to be notified as API features launch.',
                                     },
                                     {
                                         q: 'How do I report a bug or request a feature?',

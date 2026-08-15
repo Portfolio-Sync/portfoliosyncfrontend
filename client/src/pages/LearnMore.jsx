@@ -333,19 +333,19 @@ export default function LearnMore() {
                         {/* Step 4 */}
                         <StepCard
                             number="04"
-                            title="Access Your Data via API"
+                            title="Access Your Data via API (Coming Soon)"
                             icon={<MagicIcon className="w-12 h-12" />}
                             color="#39ff14"
                             demoPlaceholder="api_integration"
                             reverse
                         >
                             <p className="text-lg text-[#a0a0a0] mb-4">
-                                PortfolioSync provides a clean API endpoint that your portfolio website can call to get all your latest project data. Just fetch and display!
+                                Today, your synced project data lands in your own portfolio repo, where your site reads it directly. A public API is in development — soon your portfolio website will be able to fetch all your latest project data with a single call. Just fetch and display!
                             </p>
                             <div className="bg-[#0a0a0f] border-2 border-[#39ff14] p-4 rounded">
-                                <div className="text-[#666666] text-xs mb-2">// Example: Fetching your projects</div>
+                                <div className="text-[#666666] text-xs mb-2">// Planned: fetching your projects</div>
                                 <pre className="text-sm text-[#e8e8e8] overflow-x-auto">
-                                    {`fetch('https://api.portfoliosync.io/projects')
+                                    {`fetch('https://API_BASE_URL/v1/projects')
   .then(res => res.json())
   .then(projects => {
     // Display on your portfolio
@@ -356,7 +356,7 @@ export default function LearnMore() {
                                 </pre>
                             </div>
                             <p className="text-sm text-[#4cc9f0] mt-4 italic">
-                                You can also query specific projects individually.
+                                You'll also be able to query specific projects individually.
                             </p>
                         </StepCard>
                     </div>
