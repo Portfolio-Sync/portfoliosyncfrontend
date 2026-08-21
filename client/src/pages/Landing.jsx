@@ -55,22 +55,42 @@ function ShieldIcon({ className }) {
     );
 }
 
+const TECH_STACK = ['React 19', 'Vite 7', 'Tailwind 4', 'GitHub OAuth'];
+
+// GitHub logins: alphanumeric plus single hyphens, 39 chars max, no leading/trailing hyphen.
+const GITHUB_USERNAME_PATTERN = /^[a-zA-Z0-9](?:[a-zA-Z0-9]|-(?=[a-zA-Z0-9])){0,38}$/;
+
 const WaitlistForm = ({ className = "" }) => {
     const [email, setEmail] = useState("");
+    const [githubUsername, setGithubUsername] = useState("");
     const [status, setStatus] = useState("idle");
     const [errorMessage, setErrorMessage] = useState("");
 
+    // People habitually type the @; the API wants the bare login.
+    const normalizedUsername = githubUsername.trim().replace(/^@/, "");
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!email) return;
+        if (!email || !normalizedUsername) return;
+
+        if (!GITHUB_USERNAME_PATTERN.test(normalizedUsername)) {
+            setErrorMessage("That doesn't look like a GitHub username.");
+            setStatus("error");
+            return;
+        }
 
         setStatus("loading");
         setErrorMessage("");
 
         try {
-            await api.post("/waitlist", { email, source: "landing" });
+            await api.post("/waitlist", {
+                email,
+                githubUsername: normalizedUsername,
+                source: "landing",
+            });
             setStatus("success");
             setEmail("");
+            setGithubUsername("");
         } catch (err) {
             setErrorMessage(
                 err.response?.data?.error || "Connection failed. Please try again."
@@ -95,7 +115,7 @@ const WaitlistForm = ({ className = "" }) => {
                         onClick={() => setStatus("idle")}
                         className="mt-4 text-[10px] text-[#666666] hover:text-[#e8e8e8] uppercase tracking-wider transition-colors"
                     >
-                        // Add another email
+                        // Submit another
                     </button>
                 </div>
             </div>
@@ -104,12 +124,31 @@ const WaitlistForm = ({ className = "" }) => {
 
     return (
         <form onSubmit={handleSubmit} className={`w-full max-w-md ${className}`}>
+            <div className="relative group mb-3">
+                <div className="absolute inset-0 bg-gradient-to-r from-[#f72585] to-[#4cc9f0] opacity-0 group-hover:opacity-20 transition-opacity duration-300 blur-lg rounded-lg" />
+                <span className="absolute left-6 top-1/2 -translate-y-1/2 z-20 text-[#666666] font-mono text-sm pointer-events-none">@</span>
+                <input
+                    type="text"
+                    placeholder="GITHUB USERNAME..."
+                    value={githubUsername}
+                    onChange={(e) => setGithubUsername(e.target.value)}
+                    autoComplete="username"
+                    autoCapitalize="none"
+                    spellCheck="false"
+                    maxLength={40}
+                    aria-label="GitHub username"
+                    className="relative z-10 w-full pl-10 pr-6 py-4 bg-[#0a0a0f] border-2 border-[#2a2a4a] text-[#e8e8e8] placeholder:text-[#666666] focus:border-[#4cc9f0] focus:outline-none focus:shadow-[0_0_20px_rgba(76,201,240,0.2)] transition-all font-mono text-sm"
+                    required
+                    disabled={status === "loading"}
+                />
+            </div>
             <div className="flex flex-col sm:flex-row gap-3">
                 <div className="flex-grow relative group">
                     <div className="absolute inset-0 bg-gradient-to-r from-[#f72585] to-[#4cc9f0] opacity-0 group-hover:opacity-20 transition-opacity duration-300 blur-lg rounded-lg" />
                     <input
                         type="email"
                         placeholder="ENTER EMAIL ADDRESS..."
+                        aria-label="Email address"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         className="relative z-10 w-full px-6 py-4 bg-[#0a0a0f] border-2 border-[#2a2a4a] text-[#e8e8e8] placeholder:text-[#666666] focus:border-[#f72585] focus:outline-none focus:shadow-[0_0_20px_rgba(247,37,133,0.2)] transition-all font-mono text-sm"
@@ -204,11 +243,15 @@ export default function Landing() {
                         </div>
 
                         {/* Tech stack indicators */}
-                        <div className="mt-12 flex items-center gap-6 opacity-50 grayscale hover:grayscale-0 transition-all duration-300">
-                            {/* Placeholders for tech logos if needed */}
-                            <div className="h-8 w-24 bg-[#2a2a4a] border border-[#444455]" />
-                            <div className="h-8 w-24 bg-[#2a2a4a] border border-[#444455]" />
-                            <div className="h-8 w-24 bg-[#2a2a4a] border border-[#444455]" />
+                        <div className="mt-12 flex flex-wrap items-center gap-3">
+                            {TECH_STACK.map((tech) => (
+                                <div
+                                    key={tech}
+                                    className="px-3 py-2 border border-[#2a2a4a] bg-[#0f0f23] text-[10px] font-mono uppercase tracking-widest text-[#666666] hover:border-[#4cc9f0] hover:text-[#4cc9f0] transition-colors duration-300"
+                                >
+                                    {tech}
+                                </div>
+                            ))}
                         </div>
                     </div>
 

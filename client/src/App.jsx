@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { ToastProvider } from './components/Toast';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -13,6 +13,7 @@ import AuthCallback from './pages/AuthCallback';
 import AuthError from './pages/AuthError';
 import LearnMore from './pages/LearnMore';
 import Documentation from './pages/Documentation';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -41,8 +42,8 @@ function App() {
             <Route path="/activity" element={<ActivityLog />} />
           </Route>
 
-          {/* Catch all - redirect to dashboard (which will redirect to login if not authenticated) */}
-          <Route path="*" element={<Navigate to="/dashboard" replace />} />
+          {/* Catch all - public 404; never bounce anonymous visitors to login */}
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </ToastProvider>
     </AuthProvider>
